@@ -19,3 +19,7 @@ alias someinternalhost='ssh 10.128.0.6'
 echo "alias someinternalhost='ssh 10.128.0.6'" >> ~/.zshrc
 
 someinternalhost
+
+# hw3 bastion config
+bastion_IP = 51.250.11.146
+someinternalhost_IP = 10.128.0.6
