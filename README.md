@@ -2,6 +2,7 @@
 mogilevich Infra repository
 
 # hw3
+# Bastion homework
 echo "Host 51.250.4.121
  IdentityFile ~/.ssh/appuser
  User appuser
@@ -26,3 +27,13 @@ https://otus.mogilevich.ru/#
 # hw3 bastion config
 bastion_IP = 51.250.4.121
 someinternalhost_IP = 10.128.0.6
+
+
+# hw4
+# YC homework
+testapp_IP = 158.160.2.136
+testapp_port = 9292
+
+# additional task
+instance deploy command:
+ yc compute instance create --name reddit-app2 --hostname reddit-app2 --memory=4 --create-boot-disk image-folder-id=standard-images,image-family=ubuntu-1604-lts,size=10GB --network-interface subnet-name=default-ru-central1-b,nat-ip-version=ipv4 --metadata serial-port-enable=1 --metadata-from-file user-data=./startup.yaml
