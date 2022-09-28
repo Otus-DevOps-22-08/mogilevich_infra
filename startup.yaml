@@ -1,0 +1,55 @@
+#cloud-config
+ users:
+   - default
+   - name: yc-user
+     sudo: ALL=(ALL) NOPASSWD:ALL
+     shell: /bin/bash
+     ssh_authorized_keys:
+       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQClf0eIxrz2yWdP5bkhsTrPhEVLFrt4P5F/yWw9iG0oJqG6b086LqtvMVl+txNUoBrTt8F/V5d122pnBajuWvsysguccfwl5D0Ag9OaFHIGVytwz+l6CMqJbz4G5dqX0xll1+rjUuix0xRFTwetL5Q7ploqy1xrqQ/Mcpr7TyK2mUcZKGG+dLGPYKSDi940TxtbOH+L6lw3jtQCFj62rmKE8SGGex2O7RrG9ZJirwofQWjxrnjWvqHvxxokaX+hilg0kRUoBAMT+4qY+IFM6pz4mQg/AYk5DGjOXxxbST388zPDQGB/oXQK+vN/gN7ey40MPSu/orK2U0yGdhE2GPmFtTJOqMWLsDRKkgyWfj0Oi10HmjiNu6aK2Z8Z12SUpRCF4wp3cbc/HVC5fEkkwnZAmxXkhJuHukaDfMcjibuIgqmehN0x9bnmRsGPJqrFbqutUJMiBDyou0zp6k+W7P9KWsJ+RXqztqgmGlNva7nmuw6VFoxRsDkmGln4i4cH3AE= appuser
+
+ write_files:
+ - content: |
+     #!/bin/bash
+     sudo apt update
+     sudo apt install -y ruby-full ruby-bundler build-essential
+     ruby -v
+     ruby_v=$?
+     bundler -v
+     bundler_v=$?
+     if [[ "$ruby_v" -eq 0 ]] && [[ "$bundler_v" -eq 0 ]]; then
+       echo "ruby installed"
+     else
+       echo "FAILED ruby install"
+     fi
+   path: /home/yc-user/install_ruby.sh
+   permissions: '0777'
+ - content: |
+     #!/bin/bash
+     wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -
+     echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
+     sudo apt update
+     sudo apt install -y mongodb-org
+     sudo systemctl start mongod
+     sudo systemctl enable mongod
+     sudo systemctl status mongod
+     if [ $? -eq 0 ]; then
+       echo "mongodb installed"
+     else
+       echo "FAILED mongodb install"
+     fi
+   path: /home/yc-user/install_mongodb.sh
+   permissions: '0777'
+ - content: |
+     #!/bin/bash
+     sudo apt install -y git
+     git clone -b monolith https://github.com/express42/reddit.git
+     cd reddit && bundle install
+     puma -d
+   path: /home/yc-user/deploy.sh
+   permissions: '0777'
+
+ runcmd:
+  - cd /home/yc-user/
+  - ./install_ruby.sh
+  - ./install_mongodb.sh
+  - ./deploy.sh
