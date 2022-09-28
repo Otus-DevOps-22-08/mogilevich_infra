@@ -29,6 +29,6 @@ someinternalhost_IP = 10.128.0.6
 
 
 # hw4
-
-testapp_IP = 35.198.167.169
+# YC homework
+testapp_IP = 158.160.2.136
 testapp_port = 9292
