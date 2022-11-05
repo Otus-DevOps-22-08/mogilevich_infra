@@ -49,3 +49,11 @@ packer build -var-file=variables.json ubuntu16.json
 Добавлен скрипт create-reddit-vm.sh для создания ВМ из готового образа с помощью Yandex.Cloud CLI
 packer validate -var-file=variables.json immutable.json
 packer build -var-file=variables.json immutable.json
+
+# HW-06
+# Terraform-1
+Установлен terraform
+Добавлен main.tf для работы с yandex cloud
+Необходимые параметры передаются через teraform.tfvars
+Добавлен load balancer lb.tf. Настроен dynamic "target"
+count инстансов задана через переменную

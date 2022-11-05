@@ -7,3 +7,4 @@ public_key_path          = "~/.ssh/appuser.pub"
 subnet_id                = "1234khptecb8d1234"
 service_account_key_file = "../packer/key_mogilevichsrvc.json"
 private_key_path         = "~/.ssh/appuser"
+unt_apps               = 2
