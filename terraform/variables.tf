@@ -9,9 +9,6 @@ variable "zone" {
   # Значение по умолчанию
   default = "ru-central1-a"
 }
-variable "zone_app" {
-  type = string
-}
 variable "public_key_path" {
   # Описание переменной
   description = "Path to the public key used for ssh access"
