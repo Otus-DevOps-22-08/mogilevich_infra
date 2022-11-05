@@ -1,7 +1,6 @@
 cloud_id                 = "1234c01dg9e1no31234"
 folder_id                = "1234qlo1rmvjbp71234"
 zone                     = "ru-central1-a"
-zone_app                 = "ru-central1-a"
 image_id                 = "12342kgnabeuh81234"
 public_key_path          = "~/.ssh/appuser.pub"
 subnet_id                = "1234khptecb8d1234"
