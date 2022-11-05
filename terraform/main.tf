@@ -1,10 +1,10 @@
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-}
+#terraform {
+#  required_providers {
+#    yandex = {
+#      source = "yandex-cloud/yandex"
+#    }
+#  }
+#}
 
 provider "yandex" {
   service_account_key_file = var.service_account_key_file
@@ -16,7 +16,7 @@ provider "yandex" {
 resource "yandex_compute_instance" "app" {
   #name = "reddit-app"
   name  = "reddit-app${count.index}"
-  zone = var.zone_app
+  zone  = var.zone_app
   count = var.count_apps
 
   resources {

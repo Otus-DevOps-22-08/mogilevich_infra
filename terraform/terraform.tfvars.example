@@ -5,6 +5,6 @@ zone_app                 = "ru-central1-a"
 image_id                 = "12342kgnabeuh81234"
 public_key_path          = "~/.ssh/appuser.pub"
 subnet_id                = "1234khptecb8d1234"
-service_account_key_file = "../packer/key_mogilevichsrvc.json"
+service_account_key_file = "secretkey.json"
 private_key_path         = "~/.ssh/appuser"
 unt_apps               = 2
